@@ -65,7 +65,7 @@ class HomeController extends Controller
 
     public function insertNote(Request $request)
     {
-        DB::table('noted')->insert([
+        DB::table('notes')->insert([
             'user_id'=>$request->user_id,
             'date_note'=>Carbon::now()->format('Y-m-d'),
             'title'=>$request->title,
@@ -80,7 +80,7 @@ class HomeController extends Controller
 
     public function updateNote(Request $request)
     {
-        DB::table('noted')->where('id',$request->note_id)->update([
+        DB::table('notes')->where('id',$request->note_id)->update([
             'user_id'=>$request->user_id,
             'date_note'=>Carbon::now()->format('Y-m-d'),
             'title'=>$request->title,
