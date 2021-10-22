@@ -42,35 +42,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function customLoginWali(Request $request)
-    {
-        $nis = DB::table('bd_siswa')->where('nis',$request->nis)->first();
-        if(!$nis)
-        {
-            return redirect('walihomepage')->with('success','Nis tidak ditemukan!');
-        }else
-        {
-            $kode = DB::table('bd_siswa')->where('kode_unik',$request->kode_unik)->first();
-            if(!$kode)
-            {
-                return redirect('walihomepage')->with('success','Kode unik tidak ditemukan!');
-            }else
-            {
-                $no_telepon = DB::table('bd_siswa')->where('no_telepon',$request->no_telepon)->first();
-                if(!$no_telepon)
-                {
-                    return redirect('walihomepage')->with('success','No telepon tidak ditemukan!');
-                }else
-                {
-                    $wali = DB::table('users')->where('id',$no_telepon->id_user_wali)->first();
-                    $user = User::find($wali->id);
-                    Auth::login($user);
-                    return redirect('homewali');
-                }
-            }
-        }
-    }
-
     public function customLoginUser(Request $request)
     {
         $email = DB::table('users')->where('email',$request->email)->first();
