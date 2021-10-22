@@ -68,4 +68,29 @@ class LoginController extends Controller
                     }
         }
     }
+
+    //register
+    public function registerUser(Request $request)
+    {
+        $email = DB::table('users')->where('email',$request->email)->first();
+        if($email)
+        {
+            return response()->json([
+                'status'=>'error',
+                'result'=>'Email Sudah Terdaftar!'
+            ],200);
+        }else
+        {
+            DB::table('users')->insert([
+                'name'=>$request->nama_lengkap,
+                'email'=>$request->email,
+                'password'=>bcrypt($request->password),
+                'created_at'=>Carbon::now()->toDateTimeString(),
+            ]);
+            return response()->json([
+                'status'=>'success',
+                'result'=>'Berhasil mendaftar silahkan login!'
+            ],200);
+        }
+    }
 }

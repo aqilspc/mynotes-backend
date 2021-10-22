@@ -22,3 +22,11 @@ Route::get('/', function () {
 
 //user 
 Route::post('login_user',[LoginController::class,'customLoginUser']);
+Route::post('register_user',[LoginController::class,'registerUser']);
+
+//note
+Route::post('get_note',[HomeController::class,'getNote']);
+Route::post('get_note_by_id',[HomeController::class,'getNoteByid']);
+Route::post('delete_note',[HomeController::class,'deletNoteById']);
+Route::post('create_note',[HomeController::class,'insertNote']);
+Route::post('update_note',[HomeController::class,'updateNote']);
